@@ -25,6 +25,12 @@ class resenet_block(nn.Module):
 
 class Resnet(nn.Module):
     def __init__(self, in_channels, output_dimension=1,downscale_architecture='resnet34'):
+    # in_channels - no. of channels in the image input
+    # output_dimensions - no. of outputs
+    # downscale_architecture - it is a list of integers, where each integer represents the number of resnet blocks before a downscale
+    #                          happens. Length of this list represents the number of downscales that happen.
+    #                          
+    
         super().__init__()
         self.downscale_architecture = downscale_architecture
         self.model_layers = []
