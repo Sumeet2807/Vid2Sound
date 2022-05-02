@@ -44,7 +44,7 @@ def main():
     batch_size_default = 256 # 1024
     learning_rate_default = 0.1
     random_seed_default = 0
-    model_dir_default = "saved_models"
+    model_dir_default = "data/saved_models"
     model_filename_default = "resnet_distributed.pth"
 
     # Each process runs on 1 GPU device specified by the local_rank argument.
@@ -113,9 +113,9 @@ def main():
     # Restricts data loading to a subset of the dataset exclusive to the current process
     train_sampler = DistributedSampler(dataset=train_set)
 
-    train_loader = DataLoader(dataset=train_set, batch_size=batch_size, sampler=train_sampler, num_workers=8)
+    train_loader = DataLoader(dataset=train_set, batch_size=batch_size, sampler=train_sampler, num_workers=4)
     # Test loader does not have to follow distributed sampling strategy
-    test_loader = DataLoader(dataset=test_set, batch_size=128, shuffle=False, num_workers=8)
+    test_loader = DataLoader(dataset=test_set, batch_size=128, shuffle=False, num_workers=4)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(ddp_model.parameters(), lr=learning_rate, momentum=0.9, weight_decay=1e-5)
