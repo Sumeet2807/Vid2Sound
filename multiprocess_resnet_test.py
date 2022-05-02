@@ -106,11 +106,10 @@ def demo_basic(rank, world_size):
 
 
 def run_demo(demo_fn, world_size):
-    a = mp.spawn(demo_fn,
+    mp.spawn(demo_fn,
              args=(world_size,),
              nprocs=world_size,
              join=True)
-    print(a)
 
 
 if __name__ == "__main__":
