@@ -95,8 +95,8 @@ def demo_basic(rank, world_size):
 
     for i,data in enumerate(split_loader):
         optimizer.zero_grad()
-        x = data['x']
-        y = data['y'].type(torch.float16)
+        x = data['x'].to(rank)
+        y = data['y'].type(torch.float16).to(rank)
         outputs = ddp_model(x)[:,0]
         loss = loss_fn(outputs, y)
         loss.backward()
