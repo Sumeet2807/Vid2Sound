@@ -37,7 +37,7 @@ class Resnet(nn.Module):
         if self.downscale_architecture == 'resnet34':
             self.downscale_architecture = [3,3,5,3]
             
-        self.model_layers.append(nn.Conv2d(in_channels,64,7,padding='same'))
+        self.model_layers.append(nn.Conv2d(in_channels,64,7,padding=3))
         self.model_layers.append(nn.BatchNorm2d(64))
         self.model_layers.append(nn.ReLU())
         #add relu
@@ -54,7 +54,7 @@ class Resnet(nn.Module):
                 in_channels = in_channels*2
                 self.model_layers.append(nn.BatchNorm2d(in_channels))
                 self.model_layers.append(nn.ReLU())
-                self.model_layers.append(nn.Conv2d(in_channels,in_channels,kernel_size=3,stride=1,padding='same'))
+                self.model_layers.append(nn.Conv2d(in_channels,in_channels,kernel_size=3,stride=1,padding=1))
                 self.model_layers.append(nn.BatchNorm2d(in_channels))
                 self.model_layers.append(nn.ReLU())
 
